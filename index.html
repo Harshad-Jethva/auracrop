@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-R">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AuraCrop - Predictive Agriculture</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="SHORTCUT ICON" href="https://placehold.co/32x32/10B981/FFFFFF?text=A" type="image/x-icon">
+    <link rel="SHORTCUT ICON" href="logo.png" type="image/x-icon">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -132,13 +133,17 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-         #field { position:fixed; inset:0; display:block; }
+
+        #field {
+            position: fixed;
+            inset: 0;
+            display: block;
+        }
     </style>
 </head>
 
 <body class="antialiased">
-  <canvas id="field"></canvas>
-    <!-- Header & Navigation -->
+    <canvas id="field"></canvas>
     <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#home" class="flex items-center space-x-3">
@@ -169,7 +174,6 @@
                 </svg>
             </button>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
             <a href="#home" class="block nav-link text-center">Home</a>
             <a href="#about" class="block nav-link text-center">About</a>
@@ -189,12 +193,9 @@
         </div>
     </header>
 
-    <!-- Main Content Area - Content will be injected here by JavaScript -->
     <main id="page-content" class="container mx-auto px-6 py-16">
-        <!-- JS will populate this section -->
-    </main>
+        </main>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-800">
         <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -219,11 +220,12 @@
                 <div>
                     <h3 class="text-white font-bold tracking-wider">Contact</h3>
                     <ul class="mt-4 space-y-2 text-gray-400">
-                        <li><a href="mailto:info@auracrop.com" class="hover:text-emerald-400">info@auracrop.com</a></li>
-                        <li><a href="tel:+911234567890" class="hover:text-emerald-400">+91 12345
-                                67890</a></li>
-                        <li class="mt-2">123 Tech Park, Silicon
-                            Avenue<br>Surat, Gujarat, 395007</li>
+                        <li><a href="mailto:hjinfotech2111@gmail.com"
+                                class="hover:text-emerald-400">hjinfotech2111@gmail.com</a></li>
+                        <li><a href="tel:+919327128042" class="hover:text-emerald-400">+91 93271 28042</a></li>
+                        <li class="mt-2">HJ INFOTECH , Amroli
+                            Surat, Gujarat, 394107
+                            India</li>
                     </ul>
                 </div>
                 <div>
@@ -262,33 +264,33 @@
         </div>
     </footer>
 
-    <!-- Modals & Popups -->
-    <!-- Sensor Info Modal -->
     <div id="sensor-modal"
         class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
-        <div class="modal-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0">
-            <div class="flex justify-between items-center p-6 bg-gray-900 rounded-t-lg">
+        <div class="modal-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0 flex flex-col">
+            <div class="flex-shrink-0 flex justify-between items-center p-6 bg-gray-900 rounded-t-lg">
                 <h2 id="sensor-title" class="text-2xl font-bold text-white">Sensor
                     Details</h2>
                 <button id="close-sensor-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
             </div>
-            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <img id="sensor-image" src="https://placehold.co/400x300/1F2937/FFFFFF?text=Sensor" alt="Sensor Image"
-                    class="rounded-lg w-full">
-                <div>
-                    <div id="sensor-description" class="text-gray-300 mb-6"></div>
-                    <div class="bg-gray-700 rounded-lg p-4">
-                        <h4 class="font-bold text-white mb-2">Estimated Cost
-                            Range</h4>
-                        <p class="text-lg text-emerald-400">₹<span id="sensor-cost-low">0</span> - ₹<span
-                                id="sensor-cost-high">0</span></p>
+            <div class="p-8 max-h-[80vh] overflow-y-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <img id="sensor-image" src="https://placehold.co/400x300/1F2937/FFFFFF?text=Sensor" alt="Sensor Image"
+                        class="rounded-lg w-full">
+                    <div>
+                        <div id="sensor-description" class="text-gray-300 mb-6"></div>
+                        <div class="bg-gray-700 rounded-lg p-4">
+                            <h4 class="font-bold text-white mb-2">Estimated Cost
+                                Range</h4>
+                            <p class="text-lg text-emerald-400">₹<span id="sensor-cost-low">0</span> - ₹<span
+                                    id="sensor-cost-high">0</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Market Info Panel -->
+
     <div id="info-panel"
         class="info-panel fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
         <div class="info-panel-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0">
@@ -300,7 +302,6 @@
         </div>
     </div>
 
-    <!-- Chatbot -->
     <div id="chatbot-bubble"
         class="chatbot-bubble fixed bottom-5 right-5 cursor-pointer bg-emerald-500 p-4 rounded-full shadow-lg z-40">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -399,15 +400,17 @@
                         </div>
                         <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <div class="card rounded-lg animated-element cursor-pointer" style="transition-delay: 200ms;" onclick="showSensorInfo('voc')">
-                                <div class="product-image-container rounded-t-lg"><img src="https://placehold.co/400x300/111827/FFFFFF?text=VOC+Sensor" alt="VOC Sensor Array" class="w-full h-48 object-cover"></div>
+                                <div class="product-image-container rounded-t-lg">
+                                    <img src="VOC.png" alt="VOC Sensor Array" class="w-full object-cover" style="border-radius:9px; height:350px;">
+                                </div>
                                 <div class="p-4"><h3 class="text-lg font-bold text-white">VOC Sensor Array</h3><p class="text-gray-400 text-sm">The 'Digital Nose' of the system.</p></div>
                             </div>
                             <div class="card rounded-lg animated-element cursor-pointer" style="transition-delay: 400ms;" onclick="showSensorInfo('multispectral')">
-                                <div class="product-image-container rounded-t-lg"><img src="https://placehold.co/400x300/111827/FFFFFF?text=Multispectral" alt="Multispectral Camera" class="w-full h-48 object-cover"></div>
+                                <div class="product-image-container rounded-t-lg"><img src="Multispectral.png" alt="Multispectral Camera" class="w-full object-cover" style="border-radius:9px; height:350px;"></div>
                                 <div class="p-4"><h3 class="text-lg font-bold text-white">Multispectral Camera</h3><p class="text-gray-400 text-sm">'Superhuman' vision for plant health.</p></div>
                             </div>
                             <div class="card rounded-lg animated-element cursor-pointer" style="transition-delay: 600ms;" onclick="showSensorInfo('microcontroller_main')">
-                                <div class="product-image-container rounded-t-lg"><img src="https://placehold.co/400x300/111827/FFFFFF?text=Controller" alt="Microcontroller" class="w-full h-48 object-cover"></div>
+                                <div class="product-image-container rounded-t-lg"><img src="Microcontroller.png" alt="Microcontroller" class="w-full object-cover" style="border-radius:9px; height:350px;"></div>
                                 <div class="p-4"><h3 class="text-lg font-bold text-white">Industrial Microcontroller</h3><p class="text-gray-400 text-sm">The onboard brain of the station.</p></div>
                             </div>
                         </div>
@@ -420,15 +423,15 @@
                         </div>
                         <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             <div class="card rounded-lg animated-element cursor-pointer" style="transition-delay: 200ms;" onclick="showSensorInfo('gas_sensor_mini')">
-                                <div class="product-image-container rounded-t-lg"><img src="https://placehold.co/400x300/111827/FFFFFF?text=Gas+Sensor" alt="Gas Sensor" class="w-full h-48 object-cover"></div>
+                                <div class="product-image-container rounded-t-lg"><img src="MQ-135.png" alt="Gas Sensor" class="w-full object-cover" style="border-radius:9px; height:350px;"></div>
                                 <div class="p-4"><h3 class="text-lg font-bold text-white">MQ-135 Gas Sensor</h3><p class="text-gray-400 text-sm">Detects general air quality changes.</p></div>
                             </div>
                             <div class="card rounded-lg animated-element cursor-pointer" style="transition-delay: 400ms;" onclick="showSensorInfo('temp_humidity_mini')">
-                                <div class="product-image-container rounded-t-lg"><img src="https://placehold.co/400x300/111827/FFFFFF?text=DHT11" alt="Temp/Humidity Sensor" class="w-full h-48 object-cover"></div>
+                                <div class="product-image-container rounded-t-lg"><img src="DHT11.png" alt="Temp/Humidity Sensor" class="w-full object-cover" style="border-radius:9px; height:350px;"></div>
                                 <div class="p-4"><h3 class="text-lg font-bold text-white">DHT11 Temp/Humidity Sensor</h3><p class="text-gray-400 text-sm">Monitors the microclimate.</p></div>
                             </div>
                             <div class="card rounded-lg animated-element cursor-pointer" style="transition-delay: 600ms;" onclick="showSensorInfo('microcontroller_mini')">
-                                <div class="product-image-container rounded-t-lg"><img src="https://placehold.co/400x300/111827/FFFFFF?text=NodeMCU" alt="NodeMCU" class="w-full h-48 object-cover"></div>
+                                <div class="product-image-container rounded-t-lg"><img src="ESP8266.png" alt="NodeMCU" class="w-full object-cover" style="border-radius:9px; height:350px;"></div>
                                 <div class="p-4"><h3 class="text-lg font-bold text-white">NodeMCU ESP8266</h3><p class="text-gray-400 text-sm">The hobbyist-grade controller.</p></div>
                             </div>
                         </div>
@@ -472,16 +475,18 @@
                         <p class="mt-4 max-w-3xl mx-auto text-gray-400">We are a passionate team of innovators, engineers, and agricultural enthusiasts dedicated to revolutionizing the farming industry.</p>
                     </div>
                     <div class="mt-12 flex flex-col items-center space-y-8">
-                        <div class="card p-8 rounded-lg text-center max-w-sm animated-element" style="transition-delay: 200ms;">
-                            <img class="w-32 h-32 rounded-full mx-auto" src="HARSHAD_PHOTO.jpg" alt="Team Member">
-                            <h3 class="mt-6 text-xl font-bold text-white">HARSHAD JETHVA</h3>
-                            <p class="text-emerald-400">Founder Of AuraCrop, Web
-                            Developer</p>
-                            <p class="mt-2 text-gray-400">The driving force behind
-                            the AuraCrop vision, combining a passion for
-                            technology with a deep respect for agriculture.
-                            expert in VIBE CODING</p>
-                        </div>
+                        <a href="https://portfolio-hj.vercel.app" target="_blank">
+                            <div class="card p-8 rounded-lg text-center max-w-sm animated-element" style="transition-delay: 200ms;">
+                                <img class="w-32 h-32 rounded-full mx-auto" src="HARSHAD_PHOTO.jpg" alt="Team Member">
+                                <h3 class="mt-6 text-xl font-bold text-white">HARSHAD JETHVA</h3>
+                                <p class="text-emerald-400">Founder Of AuraCrop, Web
+                                    Developer</p>
+                                    <p class="mt-2 text-gray-400">The driving force behind
+                                        the AuraCrop vision, combining a passion for
+                                        technology with a deep respect for agriculture.
+                                        expert in VIBE CODING</p>
+                                        </div>
+                                        </a>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl w-full">
                             <div class="card p-8 rounded-lg text-center animated-element" style="transition-delay: 400ms;">
                                 <img class="w-32 h-32 rounded-full mx-auto" src="photo2.jpg" alt="Team Member">
@@ -507,12 +512,10 @@
                         <p class="mt-4 max-w-3xl mx-auto text-gray-400">We're here to help. Reach out to us with any questions or to start your journey with proactive farming.</p>
                     </div>
                     <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                        <!-- Contact Info -->
                         <div class="animated-element" style="transition-delay: 200ms;">
                              <h3 class="text-2xl font-bold text-white mb-6">Our Information</h3>
                              <div class="space-y-6">
                                 <div class="flex items-start space-x-4">
-                                    <!-- Phone Icon -->
                                     <div class="bg-emerald-500/20 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg></div>
                                     <div>
                                         <h4 class="text-lg font-semibold text-white">Phone Number</h4>
@@ -520,7 +523,6 @@
                                     </div>
                                 </div>
                                 <div class="flex items-start space-x-4">
-  <!-- Email Icon -->
   <div class="bg-emerald-500/20 p-3 rounded-full">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -537,7 +539,6 @@
   </div>
 </div>
                                 <div class="flex items-start space-x-4">
-                                    <!-- Address Icon -->
                                     <div class="bg-emerald-500/20 p-3 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
                                     <div>
                                         <h4 class="text-lg font-semibold text-white">Address</h4>
@@ -546,7 +547,6 @@
                                 </div>
                              </div>
                         </div>
-                        <!-- Contact Form -->
                         <div class="card p-8 rounded-lg animated-element" style="transition-delay: 400ms;">
                              <div id="contact-form-container">
                                 <h3 class="text-2xl font-bold text-white mb-6">Send us a Message</h3>
@@ -576,12 +576,12 @@
         };
 
         const sensorData = {
-            voc: { name: "VOC Sensor Array", description: "This is the core of our predictive technology. A Volatile Organic Compound (VOC) sensor array acts as a 'digital nose'. When a plant is under stress from disease or pests, it releases unique chemical signals (scents) into the air. Our electronic nose detects these subtle scents, creating a digital signature that our AI uses to identify the specific problem at a pre-symptomatic stage.", costLow: "2,000", costHigh: "8,000", image: "https://placehold.co/400x300/111827/FFFFFF?text=VOC+Sensor" },
-            multispectral: { name: "Multispectral Camera", description: "This camera provides 'superhuman' vision. It captures light wavelengths that the human eye cannot see, particularly in the Near-Infrared (NIR) spectrum. By analyzing how light reflects off the leaves, we can calculate critical plant health indices like NDVI, which indicate changes in chlorophyll levels and can signal nutrient deficiencies long before the plant turns yellow.", costLow: "3,500", costHigh: "25,000", image: "https://placehold.co/400x300/111827/FFFFFF?text=Multispectral" },
-            microcontroller_main: { name: "Industrial Microcontroller", description: "This is the powerful, low-energy onboard brain of the AuraCrop Station. It manages all the sensors, runs pre-processing algorithms to clean the data, and handles the secure transmission of information to our cloud platform. An industrial-grade controller ensures reliability and performance in harsh field conditions.", costLow: "800", costHigh: "6,000", image: "https://placehold.co/400x300/111827/FFFFFF?text=Controller" },
-            gas_sensor_mini: { name: "MQ-135 Gas Sensor", description: "For our proof-of-concept prototype, the MQ-135 acts as a simplified 'digital nose'. While not as specific as a full VOC array, it's excellent for detecting general changes in air quality, such as CO₂, which can be altered by a plant's stress response. It's a low-cost way to validate the core concept.", costLow: "150", costHigh: "800", image: "https://placehold.co/400x300/111827/FFFFFF?text=Gas+Sensor" },
-            temp_humidity_mini: { name: "DHT11 Temp/Humidity Sensor", description: "This sensor is crucial for providing environmental context. Many diseases and pests thrive under specific temperature and humidity conditions. By monitoring the microclimate around the plant, we can add critical data points that help our AI make a more accurate diagnosis.", costLow: "100", costHigh: "400", image: "https://placehold.co/400x300/111827/FFFFFF?text=DHT11" },
-            microcontroller_mini: { name: "NodeMCU ESP8266", description: "The ESP8266 is a popular choice for IoT projects and our mini prototype. It's a low-cost microcontroller with built-in Wi-Fi, making it perfect for collecting sensor data and sending it to the cloud for visualization and analysis. It's the ideal brain for a proof-of-concept device.", costLow: "300", costHigh: "650", image: "https://placehold.co/400x300/111827/FFFFFF?text=NodeMCU" }
+            voc: { name: "VOC Sensor Array", description: "This is the core of our predictive technology. A Volatile Organic Compound (VOC) sensor array acts as a 'digital nose'. When a plant is under stress from disease or pests, it releases unique chemical signals (scents) into the air. Our electronic nose detects these subtle scents, creating a digital signature that our AI uses to identify the specific problem at a pre-symptomatic stage.", costLow: "2,000", costHigh: "8,000", image: "VOC.png" },
+            multispectral: { name: "Multispectral Camera", description: "This camera provides 'superhuman' vision. It captures light wavelengths that the human eye cannot see, particularly in the Near-Infrared (NIR) spectrum. By analyzing how light reflects off the leaves, we can calculate critical plant health indices like NDVI, which indicate changes in chlorophyll levels and can signal nutrient deficiencies long before the plant turns yellow.", costLow: "3,500", costHigh: "25,000", image: "Multispectral.png" },
+            microcontroller_main: { name: "Industrial Microcontroller", description: "This is the powerful, low-energy onboard brain of the AuraCrop Station. It manages all the sensors, runs pre-processing algorithms to clean the data, and handles the secure transmission of information to our cloud platform. An industrial-grade controller ensures reliability and performance in harsh field conditions.", costLow: "800", costHigh: "6,000", image: "Microcontroller.png" },
+            gas_sensor_mini: { name: "MQ-135 Gas Sensor", description: "For our proof-of-concept prototype, the MQ-135 acts as a simplified 'digital nose'. While not as specific as a full VOC array, it's excellent for detecting general changes in air quality, such as CO₂, which can be altered by a plant's stress response. It's a low-cost way to validate the core concept.", costLow: "150", costHigh: "800", image: "MQ-135.png" },
+            temp_humidity_mini: { name: "DHT11 Temp/Humidity Sensor", description: "This sensor is crucial for providing environmental context. Many diseases and pests thrive under specific temperature and humidity conditions. By monitoring the microclimate around the plant, we can add critical data points that help our AI make a more accurate diagnosis.", costLow: "100", costHigh: "400", image: "DHT11.png" },
+            microcontroller_mini: { name: "NodeMCU ESP8266", description: "The ESP8266 is a popular choice for IoT projects and our mini prototype. It's a low-cost microcontroller with built-in Wi-Fi, making it perfect for collecting sensor data and sending it to the cloud for visualization and analysis. It's the ideal brain for a proof-of-concept device.", costLow: "300", costHigh: "650", image: "ESP8266.png" }
         };
 
         const marketInfo = {
@@ -960,4 +960,3 @@
 </body>
 
 </html>
-
