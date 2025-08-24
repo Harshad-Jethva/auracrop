@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AuraCrop - Predictive Agriculture</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-            rel="stylesheet">
-        <link rel="SHORTCUT ICON"
-            href="https://placehold.co/32x32/10B981/FFFFFF?text=A"
-            type="image/x-icon">
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraCrop - Predictive Agriculture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="SHORTCUT ICON" href="https://placehold.co/32x32/10B981/FFFFFF?text=A" type="image/x-icon">
+    <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #030712;
@@ -50,7 +46,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         /* Animation for elements scrolling into view */
         .animated-element {
             opacity: 0;
@@ -96,11 +92,13 @@
             box-shadow: 0 10px 15px -3px rgba(52, 211, 153, 0.1), 0 4px 6px -2px rgba(52, 211, 153, 0.05);
         }
 
-        .modal-overlay, .info-panel {
+        .modal-overlay,
+        .info-panel {
             transition: opacity 0.3s ease-in-out;
         }
 
-        .modal-content, .info-panel-content {
+        .modal-content,
+        .info-panel-content {
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
 
@@ -134,237 +132,203 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        canvas { position:fixed; inset:0; display:block; }
     </style>
-    </head>
+</head>
 
-    <body class="antialiased">
-
-        <!-- Header & Navigation -->
-        <header
-            class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-800">
-            <nav
-                class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#home" class="flex items-center space-x-3">
-                    <img
-                        src="logo.png"
-                        alt="AuraCrop Logo" class="h-12 w-auto">
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <div class="dropdown">
-                        <a href="#product" class="nav-link">Product</a>
-                        <div class="dropdown-content">
-                            <a href="#main-project">AuraCrop Station</a>
-                            <a href="#mini-project">Mini IoT Project</a>
-                        </div>
+<body class="antialiased">
+  <canvas id="field"></canvas>
+    <!-- Header & Navigation -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-3">
+                <img src="logo.png" alt="AuraCrop Logo" class="h-12 w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="#product" class="nav-link">Product</a>
+                    <div class="dropdown-content">
+                        <a href="#main-project">AuraCrop Station</a>
+                        <a href="#mini-project">Mini IoT Project</a>
                     </div>
-                    <a href="#process" class="nav-link">Process</a>
-                    <a href="#market" class="nav-link">Market Analysis</a>
-                    <a href="#team" class="nav-link">Team</a>
-                   
                 </div>
-                <a href="#contact" id="get-started-btn-static"
-                    class="hidden md:block bg-emerald-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-emerald-600 transition-transform transform hover:scale-105">Get
-                    Started</a>
-                <button id="mobile-menu-button" class="md:hidden text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
-            </nav>
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-                <a href="#home" class="block nav-link text-center">Home</a>
-                <a href="#about" class="block nav-link text-center">About</a>
-                <a href="#product"
-                    class="block nav-link text-center">Product</a>
-                <a href="#main-project"
-                    class="block nav-link text-center pl-4">- AuraCrop
-                    Station</a>
-                <a href="#mini-project"
-                    class="block nav-link text-center pl-4">- Mini IoT
-                    Project</a>
-                <a href="#process"
-                    class="block nav-link text-center">Process</a>
-                <a href="#market" class="block nav-link text-center">Market
-                    Analysis</a>
-                <a href="#team" class="block nav-link text-center">Team</a>
-                <a href="#contact"
-                    class="block nav-link text-center">Contact</a>
-                <a href="#contact" id="get-started-btn-mobile"
-                    class="w-full bg-emerald-500 text-white text-center font-semibold mt-2 px-5 py-2 rounded-lg hover:bg-emerald-600 transition-colors">Get
-                    Started</a>
+                <a href="#process" class="nav-link">Process</a>
+                <a href="#market" class="nav-link">Market Analysis</a>
+                <a href="#team" class="nav-link">Team</a>
+
             </div>
-        </header>
+            <a href="#contact" id="get-started-btn-static"
+                class="hidden md:block bg-emerald-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-emerald-600 transition-transform transform hover:scale-105">Get
+                Started</a>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#home" class="block nav-link text-center">Home</a>
+            <a href="#about" class="block nav-link text-center">About</a>
+            <a href="#product" class="block nav-link text-center">Product</a>
+            <a href="#main-project" class="block nav-link text-center pl-4">- AuraCrop
+                Station</a>
+            <a href="#mini-project" class="block nav-link text-center pl-4">- Mini IoT
+                Project</a>
+            <a href="#process" class="block nav-link text-center">Process</a>
+            <a href="#market" class="block nav-link text-center">Market
+                Analysis</a>
+            <a href="#team" class="block nav-link text-center">Team</a>
+            <a href="#contact" class="block nav-link text-center">Contact</a>
+            <a href="#contact" id="get-started-btn-mobile"
+                class="w-full bg-emerald-500 text-white text-center font-semibold mt-2 px-5 py-2 rounded-lg hover:bg-emerald-600 transition-colors">Get
+                Started</a>
+        </div>
+    </header>
 
-        <!-- Main Content Area - Content will be injected here by JavaScript -->
-        <main id="page-content" class="container mx-auto px-6 py-16">
-            <!-- JS will populate this section -->
-        </main>
+    <!-- Main Content Area - Content will be injected here by JavaScript -->
+    <main id="page-content" class="container mx-auto px-6 py-16">
+        <!-- JS will populate this section -->
+    </main>
 
-        <!-- Footer -->
-        <footer class="bg-gray-900 border-t border-gray-800">
-            <div class="container mx-auto px-6 py-12">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="md:col-span-1">
-                        <a href="#home" class="flex items-center space-x-3">
-                            <img
-                                src="https://placehold.co/120x50/030712/34D399?text=AuraCrop"
-                                alt="AuraCrop Logo" class="h-10 w-auto">
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <a href="#home" class="flex items-center space-x-3">
+                        <img src="https://placehold.co/120x50/030712/34D399?text=AuraCrop" alt="AuraCrop Logo"
+                            class="h-10 w-auto">
+                    </a>
+                    <p class="mt-4 text-gray-400">Proactive farming for a
+                        sustainable future.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold tracking-wider">Quick
+                        Links</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-emerald-400">About</a></li>
+                        <li><a href="#product" class="text-gray-400 hover:text-emerald-400">Product</a></li>
+                        <li><a href="#process" class="text-gray-400 hover:text-emerald-400">Process</a></li>
+                        <li><a href="#team" class="text-gray-400 hover:text-emerald-400">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold tracking-wider">Contact</h3>
+                    <ul class="mt-4 space-y-2 text-gray-400">
+                        <li><a href="mailto:info@auracrop.com" class="hover:text-emerald-400">info@auracrop.com</a></li>
+                        <li><a href="tel:+911234567890" class="hover:text-emerald-400">+91 12345
+                                67890</a></li>
+                        <li class="mt-2">123 Tech Park, Silicon
+                            Avenue<br>Surat, Gujarat, 395007</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold tracking-wider">Follow
+                        Us</h3>
+                    <div class="flex mt-4 space-x-4">
+                        <a href="#"
+                            class="text-gray-400 hover:text-emerald-400 transition-transform transform hover:scale-110">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                    clip-rule="evenodd" />
+                            </svg>
                         </a>
-                        <p class="mt-4 text-gray-400">Proactive farming for a
-                            sustainable future.</p>
+                        <a href="#"
+                            class="text-gray-400 hover:text-emerald-400 transition-transform transform hover:scale-110">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="text-gray-400 hover:text-emerald-400 transition-transform transform hover:scale-110">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.477 2 12.014c0 4.438 2.865 8.225 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
-                    <div>
-                        <h3 class="text-white font-bold tracking-wider">Quick
-                            Links</h3>
-                        <ul class="mt-4 space-y-2">
-                            <li><a href="#about"
-                                    class="text-gray-400 hover:text-emerald-400">About</a></li>
-                            <li><a href="#product"
-                                    class="text-gray-400 hover:text-emerald-400">Product</a></li>
-                            <li><a href="#process"
-                                    class="text-gray-400 hover:text-emerald-400">Process</a></li>
-                            <li><a href="#team"
-                                    class="text-gray-400 hover:text-emerald-400">Team</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3
-                            class="text-white font-bold tracking-wider">Contact</h3>
-                        <ul class="mt-4 space-y-2 text-gray-400">
-                            <li><a href="mailto:info@auracrop.com"
-                                    class="hover:text-emerald-400">info@auracrop.com</a></li>
-                            <li><a href="tel:+911234567890"
-                                    class="hover:text-emerald-400">+91 12345
-                                    67890</a></li>
-                            <li class="mt-2">123 Tech Park, Silicon
-                                Avenue<br>Surat, Gujarat, 395007</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-white font-bold tracking-wider">Follow
-                            Us</h3>
-                        <div class="flex mt-4 space-x-4">
-                            <a href="#"
-                                class="text-gray-400 hover:text-emerald-400 transition-transform transform hover:scale-110">
-                                <svg class="h-6 w-6" fill="currentColor"
-                                    viewBox="0 0 24 24" aria-hidden="true"><path
-                                        fill-rule="evenodd"
-                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                                        clip-rule="evenodd" /></svg>
-                            </a>
-                            <a href="#"
-                                class="text-gray-400 hover:text-emerald-400 transition-transform transform hover:scale-110">
-                                <svg class="h-6 w-6" fill="currentColor"
-                                    viewBox="0 0 24 24" aria-hidden="true"><path
-                                        d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-                            </a>
-                            <a href="#"
-                                class="text-gray-400 hover:text-emerald-400 transition-transform transform hover:scale-110">
-                                <svg class="h-6 w-6" fill="currentColor"
-                                    viewBox="0 0 24 24" aria-hidden="true"><path
-                                        fill-rule="evenodd"
-                                        d="M12 2C6.477 2 2 6.477 2 12.014c0 4.438 2.865 8.225 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.014C22 6.477 17.523 2 12 2z"
-                                        clip-rule="evenodd" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="mt-8 border-t border-gray-800 pt-8 text-center text-gray-500">
-                    <p>&copy; 2025 AuraCrop. All rights reserved.</p>
                 </div>
             </div>
-        </footer>
+            <div class="mt-8 border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 AuraCrop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-        <!-- Modals & Popups -->
-        <!-- Sensor Info Modal -->
-        <div id="sensor-modal"
-            class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
-            <div
-                class="modal-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0">
-                <div
-                    class="flex justify-between items-center p-6 bg-gray-900 rounded-t-lg">
-                    <h2 id="sensor-title"
-                        class="text-2xl font-bold text-white">Sensor
-                        Details</h2>
-                    <button id="close-sensor-modal"
-                        class="text-gray-400 hover:text-white text-3xl">&times;</button>
-                </div>
-                <div
-                    class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <img id="sensor-image"
-                        src="https://placehold.co/400x300/1F2937/FFFFFF?text=Sensor"
-                        alt="Sensor Image" class="rounded-lg w-full">
-                    <div>
-                        <div id="sensor-description"
-                            class="text-gray-300 mb-6"></div>
-                        <div class="bg-gray-700 rounded-lg p-4">
-                            <h4 class="font-bold text-white mb-2">Estimated Cost
-                                Range</h4>
-                            <p class="text-lg text-emerald-400">₹<span
-                                    id="sensor-cost-low">0</span> - ₹<span
-                                    id="sensor-cost-high">0</span></p>
-                        </div>
+    <!-- Modals & Popups -->
+    <!-- Sensor Info Modal -->
+    <div id="sensor-modal"
+        class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div class="modal-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0">
+            <div class="flex justify-between items-center p-6 bg-gray-900 rounded-t-lg">
+                <h2 id="sensor-title" class="text-2xl font-bold text-white">Sensor
+                    Details</h2>
+                <button id="close-sensor-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <img id="sensor-image" src="https://placehold.co/400x300/1F2937/FFFFFF?text=Sensor" alt="Sensor Image"
+                    class="rounded-lg w-full">
+                <div>
+                    <div id="sensor-description" class="text-gray-300 mb-6"></div>
+                    <div class="bg-gray-700 rounded-lg p-4">
+                        <h4 class="font-bold text-white mb-2">Estimated Cost
+                            Range</h4>
+                        <p class="text-lg text-emerald-400">₹<span id="sensor-cost-low">0</span> - ₹<span
+                                id="sensor-cost-high">0</span></p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Market Info Panel -->
-        <div id="info-panel"
-            class="info-panel fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
-            <div
-                class="info-panel-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0">
-                <div
-                    class="flex justify-between items-center p-6 bg-gray-900 rounded-t-lg">
-                    <h2 id="info-title"
-                        class="text-2xl font-bold text-white"></h2>
-                    <button id="close-info-panel"
-                        class="text-gray-400 hover:text-white text-3xl">&times;</button>
-                </div>
-                <div id="info-content"
-                    class="p-8 max-h-[60vh] overflow-y-auto"></div>
+    <!-- Market Info Panel -->
+    <div id="info-panel"
+        class="info-panel fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div class="info-panel-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl transform scale-95 opacity-0">
+            <div class="flex justify-between items-center p-6 bg-gray-900 rounded-t-lg">
+                <h2 id="info-title" class="text-2xl font-bold text-white"></h2>
+                <button id="close-info-panel" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div id="info-content" class="p-8 max-h-[60vh] overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div id="chatbot-bubble"
+        class="chatbot-bubble fixed bottom-5 right-5 cursor-pointer bg-emerald-500 p-4 rounded-full shadow-lg z-40">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                d="M18 10c0 3.866-3.582 7-8 7a8.828 8.828 0 01-4.323-1.238L4.4 16.34a1 1 0 01-1.26-1.525l.93-1.396A7.962 7.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9a1 1 0 11-2 0 1 1 0 012 0zm5 0a1 1 0 11-2 0 1 1 0 012 0z"
+                clip-rule="evenodd" />
+        </svg>
+    </div>
+    <div id="chatbot-window"
+        class="hidden fixed bottom-20 right-5 w-80 md:w-96 bg-gray-800 rounded-lg shadow-2xl flex flex-col z-40"
+        style="height: 500px;">
+        <div class="bg-gray-900 p-4 rounded-t-lg flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">AuraCrop Assistant</h3>
+            <button id="close-chatbot" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col space-y-4"></div>
+        <div class="p-4 border-t border-gray-700">
+            <div class="flex space-x-2">
+                <input type="text" id="chat-input"
+                    class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    placeholder="Ask a question...">
+                <button id="send-chat"
+                    class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600">Send</button>
             </div>
         </div>
+    </div>
 
-        <!-- Chatbot -->
-        <div id="chatbot-bubble"
-            class="chatbot-bubble fixed bottom-5 right-5 cursor-pointer bg-emerald-500 p-4 rounded-full shadow-lg z-40">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white"
-                viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd"
-                    d="M18 10c0 3.866-3.582 7-8 7a8.828 8.828 0 01-4.323-1.238L4.4 16.34a1 1 0 01-1.26-1.525l.93-1.396A7.962 7.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9a1 1 0 11-2 0 1 1 0 012 0zm5 0a1 1 0 11-2 0 1 1 0 012 0z"
-                    clip-rule="evenodd" />
-            </svg>
-        </div>
-        <div id="chatbot-window"
-            class="hidden fixed bottom-20 right-5 w-80 md:w-96 bg-gray-800 rounded-lg shadow-2xl flex flex-col z-40"
-            style="height: 500px;">
-            <div
-                class="bg-gray-900 p-4 rounded-t-lg flex justify-between items-center">
-                <h3 class="text-lg font-bold text-white">AuraCrop Assistant</h3>
-                <button id="close-chatbot"
-                    class="text-gray-400 hover:text-white text-3xl">&times;</button>
-            </div>
-            <div id="chat-messages"
-                class="flex-1 p-4 overflow-y-auto flex flex-col space-y-4"></div>
-            <div class="p-4 border-t border-gray-700">
-                <div class="flex space-x-2">
-                    <input type="text" id="chat-input"
-                        class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                        placeholder="Ask a question...">
-                    <button id="send-chat"
-                        class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600">Send</button>
-                </div>
-            </div>
-        </div>
-
-        <script>
+    <script>
         // --- DATA FOR PAGE CONTENT & INTERACTIVE ELEMENTS ---
         const pageContent = {
             home: `
@@ -660,14 +624,14 @@
                     popupElement.classList.add('hidden');
                 }, 300);
             };
-            
+
             // --- SPA Router & Page Management ---
             const mountPage = (pageId) => {
                 const contentKey = (pageId === 'main-project' || pageId === 'mini-project') ? 'sensors' : pageId;
                 pageContentContainer.innerHTML = pageContent[contentKey] || pageContent['home'];
 
                 if (contentKey === 'market') renderCharts();
-                
+
                 // Re-bind events for dynamically added content
                 pageContentContainer.querySelectorAll('.get-started-btn, a[href="#contact"]').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); router('#contact'); }));
                 pageContentContainer.querySelectorAll('a[href="#about"]').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); router('#about'); }));
@@ -676,7 +640,7 @@
                     pageContentContainer.querySelector('#contact-form-container').classList.add('hidden');
                     pageContentContainer.querySelector('#form-submission-message').classList.remove('hidden');
                 });
-                
+
                 observeElements(pageContentContainer);
             };
 
@@ -692,13 +656,13 @@
                 allNavLinks.forEach(link => {
                     const linkHref = link.getAttribute('href').substring(1);
                     const parentDropdown = link.closest('.dropdown');
-                    
+
                     link.classList.remove('active');
                     if (parentDropdown) parentDropdown.querySelector('a.nav-link').classList.remove('active');
 
                     if (linkHref === mainSectionId) {
                         link.classList.add('active');
-                         if (parentDropdown) parentDropdown.querySelector('a.nav-link').classList.add('active');
+                        if (parentDropdown) parentDropdown.querySelector('a.nav-link').classList.add('active');
                     }
                 });
 
@@ -717,9 +681,9 @@
             const renderCharts = () => {
                 if (chartInstances.farmers) chartInstances.farmers.destroy();
                 if (chartInstances.market) chartInstances.market.destroy();
-                
+
                 const farmersCtx = document.getElementById('farmersChart')?.getContext('2d');
-                if(farmersCtx) {
+                if (farmersCtx) {
                     chartInstances.farmers = new Chart(farmersCtx, {
                         type: 'bar', data: { labels: ['Farmers in Gujarat', 'Farmers in India'], datasets: [{ label: 'Number of Farmers (in Millions)', data: [5, 146], backgroundColor: ['rgba(251, 191, 36, 0.7)', 'rgba(52, 211, 153, 0.7)'], borderColor: ['#FBBF24', '#34D399'], borderWidth: 2 }] },
                         options: { animation: { duration: 1000, easing: 'easeOutQuart' }, responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: '#9CA3AF' } }, x: { ticks: { color: '#9CA3AF' } } }, onClick: (e, el) => { if (el[0]) { const i = el[0].index; if (i === 0) showInfoPanel('farmersGujarat'); if (i === 1) showInfoPanel('farmersIndia'); } } }
@@ -727,7 +691,7 @@
                 }
 
                 const marketCtx = document.getElementById('marketShareChart')?.getContext('2d');
-                if(marketCtx) {
+                if (marketCtx) {
                     chartInstances.market = new Chart(marketCtx, {
                         type: 'doughnut', data: { labels: ['Traditional Methods', 'Drone Services', 'Scouting Apps', 'AuraCrop (Projected)'], datasets: [{ data: [65, 15, 10, 10], backgroundColor: ['#6B7280', '#3B82F6', '#F97316', '#10B981'], borderColor: '#1f2937', borderWidth: 4, hoverOffset: 10 }] },
                         options: { animation: { animateRotate: true, animateScale: true, duration: 1200 }, responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#9CA3AF' } } }, onClick: (e, el) => { if (el[0]) { const i = el[0].index; if (i === 0) showInfoPanel('traditional'); if (i === 1) showInfoPanel('drones'); if (i === 2) showInfoPanel('apps'); if (i === 3) showInfoPanel('auracrop'); } } }
@@ -738,7 +702,7 @@
             // --- Chatbot Logic ---
             const chatMessages = document.getElementById('chat-messages');
             const chatInput = document.getElementById('chat-input');
-            
+
             const addMessage = (sender, text) => {
                 const msg = document.createElement('div');
                 msg.classList.add('p-3', 'rounded-lg', 'max-w-xs');
@@ -811,13 +775,13 @@
             });
 
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            
+
             // Popups close buttons
             document.getElementById('close-sensor-modal').addEventListener('click', () => closePopup(sensorModal));
             sensorModal.addEventListener('click', (e) => { if (e.target === sensorModal) closePopup(sensorModal); });
             document.getElementById('close-info-panel').addEventListener('click', () => closePopup(infoPanel));
             infoPanel.addEventListener('click', (e) => { if (e.target === infoPanel) closePopup(infoPanel); });
-            
+
             // Chatbot listeners
             chatbotBubble.addEventListener('click', () => {
                 chatbotWindow.classList.remove('hidden');
@@ -837,6 +801,162 @@
             router(window.location.hash || '#home');
         });
     </script>
-    </body>
+    <script>
+        const CONFIG = {
+            baseSpeed: 40,
+            dpi: Math.min(2, window.devicePixelRatio || 1),
+            particleCount: [100, 160],
+            leafCount: 20
+        };
+
+        const bacteriaSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='28' viewBox='0 0 60 28'>
+      <defs>
+        <linearGradient id='gb' x1='0' y1='0' x2='1' y2='1'>
+          <stop offset='0' stop-color='#a8e6ff'/>
+          <stop offset='1' stop-color='#0077a8'/>
+        </linearGradient>
+      </defs>
+      <ellipse cx='30' cy='14' rx='28' ry='12' fill='url(#gb)' stroke='#004d66' stroke-width='2'/>
+      <circle cx='15' cy='14' r='3' fill='#004d66'/>
+      <circle cx='25' cy='10' r='2' fill='#004d66'/>
+      <circle cx='40' cy='16' r='2.5' fill='#004d66'/>
+      <circle cx='50' cy='12' r='2' fill='#004d66'/>
+    </svg>`;
+
+        const leafSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='20' viewBox='0 0 40 20'>
+      <path d='M2 10 Q20 -5 38 10 Q20 25 2 10Z' fill='green' stroke='darkgreen' stroke-width='1.5'/>
+    </svg>`;
+
+        function svgToImage(svg) {
+            const img = new Image();
+            img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+            return img;
+        }
+
+        const bacteriaImg = svgToImage(bacteriaSVG);
+        const leafImg = svgToImage(leafSVG);
+
+        const canvas = document.getElementById('field');
+        const ctx = canvas.getContext('2d');
+        function resize() {
+            canvas.width = innerWidth * CONFIG.dpi;
+            canvas.height = innerHeight * CONFIG.dpi;
+            canvas.style.width = innerWidth + 'px';
+            canvas.style.height = innerHeight + 'px';
+        }
+        window.addEventListener('resize', resize); resize();
+
+        // Bacteria class
+        let bacteria = null;
+        class Bacteria {
+            constructor() {
+                this.img = bacteriaImg;
+                this.w = 60 * CONFIG.dpi;
+                this.h = 28 * CONFIG.dpi;
+                this.x = canvas.width / 2 - this.w / 2;
+                this.y = -this.h;
+                this.vy = CONFIG.baseSpeed * CONFIG.dpi / 60;
+                this.blasted = false;
+            }
+            step(dt) {
+                if (this.blasted) return;
+                this.y += this.vy * dt * 60;
+                if (this.y + this.h / 2 > canvas.height / 2 && !this.blasted) {
+                    this.blast();
+                }
+            }
+            draw() {
+                if (this.blasted) return;
+                ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+            }
+            blast() {
+                this.blasted = true;
+                spawnExplosion(this.x + this.w / 2, this.y + this.h / 2);
+            }
+        }
+
+        // Leaf class
+        class Leaf {
+            constructor() {
+                this.img = leafImg;
+                this.w = 40 * CONFIG.dpi;
+                this.h = 20 * CONFIG.dpi;
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.vx = (Math.random() - 0.5) * 20 * CONFIG.dpi / 60;
+                this.vy = (20 + Math.random() * 30) * CONFIG.dpi / 60;
+                this.rot = Math.random() * Math.PI * 2;
+                this.vrot = (Math.random() - 0.5) * 0.02;
+            }
+            step(dt) {
+                this.x += this.vx * dt * 60;
+                this.y += this.vy * dt * 60;
+                this.rot += this.vrot * dt * 60;
+                if (this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rot);
+                ctx.drawImage(this.img, -this.w / 2, -this.h / 2, this.w, this.h);
+                ctx.restore();
+            }
+        }
+
+        // Particle class for blast
+        class Particle {
+            constructor(x, y) {
+                const ang = Math.random() * Math.PI * 2;
+                const spd = 100 + Math.random() * 200;
+                this.vx = Math.cos(ang) * spd * CONFIG.dpi / 60;
+                this.vy = Math.sin(ang) * spd * CONFIG.dpi / 60;
+                this.x = x; this.y = y;
+                this.life = 0.8; this.age = 0;
+                this.size = 2 + Math.random() * 4;
+            }
+            step(dt) { this.age += dt; this.x += this.vx * dt * 60; this.y += this.vy * dt * 60; }
+            draw() {
+                const t = Math.max(0, 1 - this.age / this.life);
+                ctx.globalAlpha = t; ctx.fillStyle = '#ff4444';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size * t, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+            }
+        }
+
+        const leaves = [];
+        for (let i = 0; i < CONFIG.leafCount; i++) leaves.push(new Leaf());
+
+        const particles = [];
+        function spawnExplosion(x, y) {
+            for (let i = 0; i < Math.floor(Math.random() * (CONFIG.particleCount[1] - CONFIG.particleCount[0]) + CONFIG.particleCount[0]); i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        let last = performance.now();
+        function frame(t) {
+            const dt = Math.min(0.033, (t - last) / 1000); last = t;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!bacteria) bacteria = new Bacteria();
+            bacteria.step(dt);
+            bacteria.draw();
+
+            for (const leaf of leaves) {
+                leaf.step(dt);
+                leaf.draw();
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].step(dt); particles[i].draw();
+                if (particles[i].age > particles[i].life) particles.splice(i, 1);
+            }
+            requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+    </script>
+</body>
 
 </html>
